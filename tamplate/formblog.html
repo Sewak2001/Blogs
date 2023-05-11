@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title%} Blog Form {% endblock title %}
+
+{% block content%}
+{% load crispy_forms_tags %}
+
+<style>
+    .container {
+        margin-top: 15px;
+
+    }
+</style>
+
+<h1 style="text-align: center;">Add/EDIT YOUR BLOG</h1>
+
+<div class="container">
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.tittle|as_crispy_field}}
+        {{form.image|as_crispy_field}}
+        {{form.description|as_crispy_field}}
+        {{form.created_by|as_crispy_field}}
+        <input type="submit" value="submit" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}

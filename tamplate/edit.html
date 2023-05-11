@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title%} Edit Blog {% endblock title %}
+{% block content %}
+
+<style>
+    .image {
+        width: 350px;
+        height: 470px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-left: 20px;
+        margin-top: -100px;
+    }
+    .des{
+        text-align: justify;
+        padding-right: 10px;
+    }
+</style>
+<h1 style="text-align: center;">EDIT YOUR BLOGS</h1>
+<hr>
+<div class="conatiner">
+    <div class="row">
+        {% for i in data %}
+        <h1 class="text-center mt-4" style="padding-left: 100px;">{{i.tittle}}</h1>
+        <h1 style="margin-left: 500px;">Description:-<a href="{% url 'update' i.id %}"> <button type="button"
+                    class="btn btn-primary">Edit</button></a>
+            <a href="{% url 'delete' i.id %}"> <button type="button" class="btn btn-danger">delete</button></a>
+        </h1>
+
+        <div class="col-lg-4">
+            <img src="{{ i.image.url}}" alt="img" class="image">
+
+        </div>
+        <div class="col-lg-8">
+            <p class="des" >{{i.description}}</p>
+
+            <span style="text-align: end;">
+                <h3>Created_by: {{i.created_by}}</h3>
+            </span>
+        </div>
+        <hr><br>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+

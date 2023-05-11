@@ -1,0 +1,45 @@
+{% extends 'loginbase.html' %}
+{% block title%} Login form {% endblock title %}
+
+{% block content%}
+
+
+<style>
+    .center {
+        display: table;
+        margin: auto;
+    }
+
+    .image {
+        margin-top: 50px;
+        width: 350px;
+        height: 470px;
+        object-fit: cover;
+        border-radius: 20px;
+        object-fit: cover;
+        transition: 0.4s;
+    }
+
+    .image:hover {
+        transform: scale(1.1);
+        box-shadow: 10px 10px 30px 5px rgb(206, 15, 47);
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        {% for i in data %}
+        <div class="col-lg-4 ">
+            
+            <a href="login">
+                <img src="{{i.image.url}}" class="image center" alt="img"> <br>
+                <h2 class="center">{{i.tittle}}</h2>
+                <h4 class="center">Created by: {{i.created_by}}</h4>
+            </a>
+            <a href="login" class="center">Read More</a> <br> <br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

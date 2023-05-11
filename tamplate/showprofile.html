@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title%} Show Profile {% endblock title %}
+{% block content%}
+
+<h1 style="text-align: center;">PROFILE </h1><br>
+
+<style>
+    .ul {
+        padding-left: 700px;
+        padding-top: 50px;
+        font-size: 40px;
+    }
+
+    .pimage {
+        width: 300px;
+        height: 300px;
+        margin-left: 160px;
+        margin-top: -160px;
+        object-fit: cover;
+        border-radius: 50%;
+        
+    }
+</style>
+
+<div class="ul">
+    <b>user:</b>{{user.username}}<br>
+    <b>email:</b>{{user.email}}<br>
+</div>
+
+<div class="pimage">
+    {% for i in image%}
+    <img src="{{i.image.url}}" alt="img" style="height: 300px; width: 300px; border-radius: 8px;"><br><br>
+    <a href="{% url 'updatei' i.id %}"><button type="button" class="btn btn-primary" style="margin-left: 590px;margin-top: -10%;">Update Photo</button></a>
+
+    <a href="{% url 'deletei' i.id %}"><button type="button" class="btn btn-primary" style="margin-right: 40%;
+     margin-left: 700px; margin-top: -90px;">Delete Photo</button></a>
+
+    <a href="{% url 'change' %}"><button type="submit" class="btn btn-primary" style="margin-left: 270%; margin-top: -140px;">Change Password</button></a>
+
+    {% endfor %}
+
+    
+    
+</div><br><br>
+<hr>
+
+<h1 style="text-align: center;"><u>Your Blog</u></h1>
+<div class="container">
+    <div class="row">
+        {% for i in data1 %}
+        <div class="col-lg-4 ">
+           
+            <a href="{% url 'readmore' i.id %}">
+                <img src="{{i.image.url}}" class="image center" alt="img" style="height: 290px; width: 290px; border-radius: 5px; margin-left: 50px;"> <br>
+                <h2 class="center" style="margin-left: 50px; color: black;">{{i.tittle}}</h2>
+                <h4 class="center" style="margin-left: 50px; color: black;">Created by: {{i.created_by}}</h4>
+            </a>
+            <a href="{% url 'readmore' i.id %}" class="center"><input type="submit" value="Read More" class="btn btn-primary" style="margin-left: 50px;"></a> <br> <br> <br> <br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

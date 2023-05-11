@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title%} Index {% endblock title %}
+{% block content%}
+<title>Index</title>
+
+<style>
+    .center {
+        display: table;
+        margin: auto;
+    }
+
+    .image {
+        margin-top: 50px;
+        width: 350px;
+        height: 470px;
+        object-fit: cover;
+        border-radius: 20px;
+        object-fit: cover;
+        transition: 0.4s;
+    }
+
+    .image:hover {
+        transform: scale(1.1);
+        box-shadow: 10px 10px 30px 5px rgb(206, 15, 47);
+    }
+    html body {
+  background: #27ae60;
+ 
+  font-family: 'Oswald', sans-serif;
+ 
+}
+
+#typingText {
+  width: 800px;
+  margin: 0 auto;
+  padding: 15px;
+  text-align: center;
+  text-shadow: 2px 3px #000;
+  color: blue;
+  font-size: 50px;
+}
+</style>
+<div id="typingText">
+
+</div>
+<script>
+  var myString = "WELCOME,all bloggers...";
+var myArray = myString.split("");
+var loopTimer;
+
+function looper() {
+  if(myArray.length > 0){
+    document.getElementById("typingText").innerHTML += myArray.shift();
+  } else {
+    clearTimeout(loopTimer);
+  }
+  loopTimer = setTimeout('looper()', 100);
+}
+looper();
+
+</script>
+
+
+<div class="container filter">
+    <h2>FILTER</h2>
+    <form action="" id='ok' method="post" >
+
+      <select  id="query" class="form-control" onchange="select()">
+      <option selected></option>
+    <a href="/">
+      <option value="tittle">By title</option>
+    </a>
+    <option value="popular">Popular</option>
+    </select>
+    </form>
+  </div>
+ 
+    <script>
+        function select(){
+          let a = document.getElementById('query');
+          console.log(a.value)
+          if (a.value == 'tittle'){
+            window.location = "/filter/tittle";
+          }else if(a.value == 'popular'){
+            window.location = "/filter/-tittle";
+          } 
+        }
+      </script>
+
+
+
+<div class="container">
+    <div class="row">
+        {% for i in data %}
+        <div class="col-lg-4 ">
+            <!-- <h2 class="center">{{i.tittle}}</h2>     -->
+            <a href="{% url 'readmore' i.id %}">
+                <img src="{{i.image.url}}" class="image center" alt="img"> <br></a>
+            <h2 class="center" style="color: #000;">{{i.tittle}}</h2>
+            <h4 class="center" style="color: #000;">Created by: {{i.created_by}}</h4><br>
+            <a href="{% url 'readmore' i.id %}" class="center"><input type="submit" value="Read More" class="btn btn-primary"></a> <br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

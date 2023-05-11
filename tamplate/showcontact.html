@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title%} Show Contect {% endblock title %}
+{% block content%}
+
+</head>
+
+<body>
+
+    <h1 style="text-align: center;">Show contect</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>mobile</th>
+                <th>address</th>
+                <th>subject</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.mobile}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.subject}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
+
+{% endblock %}

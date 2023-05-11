@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title%} Show Blog {% endblock title %}
+
+{% block content%}
+
+</head>
+
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>tittle</th>
+                <th>image</th>
+                <th>description</th>
+                <th>created_by</th>
+                <th>action</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.tittle}}</td>
+                <td>
+                    <img src="{{i.image.url}}" alt="img" style="height: 2cm; width: 2cm;">
+                </td>
+                <td>{{i.description}}</td>
+                <td>{{i.created_by}}</td>
+                <td>
+                    <a href="{% url 'delete' i.id %}">delete</a>
+                </td>
+                <td>
+                    <a href="{% url 'update' i.id %}">update</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title%} Contect Form {% endblock title %}
+{% block content%}
+{% load crispy_forms_tags %}
+<title>Contact</title>
+<style>
+    .container {
+        margin-top: 15px;
+    }
+    #div_id_subject {
+  display: flex;
+}
+</style>
+<h1 style="text-align: center;">CONTACT US</h1>
+<div class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.name|as_crispy_field}}
+        {{form.email|as_crispy_field}}
+        {{form.mobile|as_crispy_field}}
+        {{form.address|as_crispy_field}}
+        {{form.subject|as_crispy_field}}
+
+        {{form.media}}
+
+        <input type="submit" value="submit" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}
