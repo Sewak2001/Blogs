@@ -8,69 +8,78 @@
     .center {
         display: table;
         margin: auto;
+    }
 
+    .image-container {
+        position: relative;
+        width: 100%;
+        max-width: 450px;
+        margin: auto;
     }
 
     .image {
-        width: 350px;
-        height: 470px;
+        width: 100%;
+        height: auto;
         object-fit: cover;
         border-radius: 8px;
     }
 
     .discript {
-        padding-left: 400px;
-        margin-top: -5px;
+        padding: 20px;
         text-align: justify;
-
     }
 
     .Discription {
-        padding-left: 400px;
-        margin-top: -460px;
+        padding: 20px;
+    }
+
+    /* Added media query for small screens */
+    @media (max-width: 767px) {
+        .Discription,
+        .discript {
+            padding: 10px;
+        }
     }
 </style>
 
 <div class="container center">
     <div class="row">
-        <div class="col-lg-3 ">
-            <h1 class="center">{{data.tittle}}</h1><br>
-            <img src="{{data.image.url}}" class="image center" alt="img">
-
-
+        <div class="col-lg-12">
+            <b><h1 class="center">{{data.tittle}}</h1></b><br>
+            <div class="image-container">
+                <img src="{{data.image.url}}" class="image center" alt="img">
+            </div>
         </div>
     </div>
 
     <h2 class="Discription">Discription:-</h2>
     <div class="container-fluid">
         <div class="discript">
-
-            <p> {{data.description}}</p>
+            <p>{{data.description}}</p>
         </div>
     </div>
     <h2 style="text-align: end;">Created_by: {{data.created_by}}</h2>
 
     <div class="comm text-end mt-5">
-
         <form action="{% url 'com' %}" method="post">
             {% csrf_token %}
-
             <input type="text" name="u_id" value="{{user}}" hidden>
             <input type="text" name="post_id" value="{{data.id}}" hidden>
             Comment Here : <input type="text" name="comment">
             <input type="submit" value="Submit">
         </form>
         {% if data2 %}
-        {% for i in data2 %}
-        {% if i.adds_id == user.username %}
-        <a href="{% url 'deletecom' i.id data.id %}" style="color: red;">Del</a>
-        {% endif %}
-        {{i.comment}} by<h5 style="color: darkblue;">{{i.adds_id}}</h5>
-        <br>
-        {% endfor %}
+            {% for i in data2 %}
+                {% if i.adds_id == user.username %}
+                    <a href="{% url 'deletecom' i.id data.id %}" style="color: red;">Del</a>
+                {% endif %}
+                <b>{{i.comment}}</b> by<h5 style="color: darkblue;">{{i.adds_id}}</h5>
+                <br>
+            {% endfor %}
         {% else %}
-        <p>NO comment Till Now</p>
+            <p>NO comment Till Now</p>
         {% endif %}
+    </div>
+</div>
 
-
-        {% endblock %}
+{% endblock %}

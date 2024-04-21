@@ -36,7 +36,10 @@
                 <img src="{{i.image.url}}" class="image center" alt="img"> <br></a>
             <h2 class="center">{{i.tittle}}</h2>
             <h4 class="center">{{i.created_by}}</h4>
-            <a href="{% url 'readmore' i.id %}" class="center">Read More</a> <br> <br>
+            <!-- <a href="{% url 'readmore' i.id %}" class="center">Read More</a> <br> <br> -->
+            <a href="{% url 'readmore' i.id %}" class="center">
+                <input type="submit" value="Read More" class="btn btn-primary">
+            </a>
         </div>
         {% endfor %}
     </div>

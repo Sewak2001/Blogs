@@ -1,8 +1,4 @@
-{% extends 'base.html' %}
-
-{% block title%}About Us{% endblock title %}
-
-{% block content %}
+<!-- 
 
 
 <head>
@@ -88,10 +84,10 @@
       <img src="/static/my_img_S.jpg" class="pic">
       <div class="text">
        
-        <h5>SEWAK:- BLOGGER</h5>
+        <h5>SEWAK:- DEVELOPER</h5>
           <p>Hello, welcome to our website.Hope you are fine.In this website use can see , add , update and delete yuor blogs.Choose your favorite blogs and read them.We will provided best quality of blogs.If you have any questions then contact us or reach on social media plateform.So try this website and get high quality of blogs and also add yours blogs.For more informations join us on telegram. <b>Thank you, have a nice day</p>
         <div class="data">
-        <a href="contectf" class="contect">Contect Me</a>
+        <a href="formc" class="contect">Contect Me</a>
         <a href="https://t.me/sewak_77" class="contect">Telegram</a>
         </div>
       </div>
@@ -99,8 +95,135 @@
   </section>
 </body>
 </html>
+
+ -->
+
+{% extends 'base.html' %}
+
+{% block title%}About Us{% endblock title %}
+
+{% block content %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .about-us {
+      height: 100vh;
+      width: 100%;
+      padding: 20px 0;
+      background: #f3bccf;
+    }
+
+    .pic {
+      height: auto;
+      width: 100%; /* Adjusted width to 100% for responsiveness */
+      border-radius: 10px;
+      max-width: 302px; /* Added max-width for better responsiveness */
+    }
+
+    .about {
+      width: 100%; /* Adjusted width to 100% for responsiveness */
+      padding: 0 10px; /* Added padding for better responsiveness */
+      display: flex;
+      flex-direction: column; /* Changed to column layout for better responsiveness */
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .text {
+      width: 100%; /* Adjusted width to 100% for responsiveness */
+      max-width: 540px; /* Added max-width for better responsiveness */
+      text-align: center; /* Centered text for better responsiveness */
+    }
+
+    .text h2 {
+      font-size: 40px; /* Adjusted font size for better responsiveness */
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .text h5 {
+      font-size: 18px; /* Adjusted font size for better responsiveness */
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .text p {
+      font-size: 16px; /* Adjusted font size for better responsiveness */
+      line-height: 22px; /* Adjusted line-height for better responsiveness */
+      letter-spacing: 1px;
+    }
+
+    .data {
+      margin-top: 30px;
+    }
+
+    .contect {
+      font-size: 16px; /* Adjusted font size for better responsiveness */
+      background: #4070f4;
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      padding: 8px 15px; /* Adjusted padding for better responsiveness */
+      border-radius: 6px;
+      transition: 0.5s;
+      display: inline-block; /* Added display property for better responsiveness */
+      margin-right: 10px; /* Added margin for better responsiveness */
+      margin-bottom: 10px; /* Added margin for better responsiveness */
+    }
+
+    .contect:hover {
+      background: #000;
+      border: 1px solid #4070f4;
+    }
+
+    .footer {
+      margin-top: 20px;
+    }
+
+    /* Media Query for responsiveness */
+    @media (min-width: 768px) {
+      .about {
+        flex-direction: row; /* Switch back to row layout for larger screens */
+      }
+
+      .text {
+        text-align: left; /* Align text to the left for larger screens */
+      }
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <h1 style="text-align: center;">ABOUT US</h1>
+  <section class="about-us">
+    <div class="about">
+      <img src="/static/my_img_S.jpg" class="pic">
+      <div class="text">
+        <h5>SEWAK:- DEVELOPER</h5>
+        <p>Hello, welcome to our website. Hope you are fine. In this website, you can see, add, update, and delete your blogs. Choose your favorite blogs and read them. We will provide the best quality of blogs. If you have any questions, then contact us or reach on social media platforms. So try this website and get high quality of blogs and also add yours blogs. For more information, join us on telegram. <b>Thank you, have a nice day</p>
+        <div class="data">
+          <a href="formc" class="contect">Contact Me</a>
+          <a href="https://t.me/sewak_77" class="contect">Telegram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
+
 {% endblock %}
-
-{% block footer %}
-
-{% endblock footer %}

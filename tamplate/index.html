@@ -23,82 +23,109 @@
         transform: scale(1.1);
         box-shadow: 10px 10px 30px 5px rgb(206, 15, 47);
     }
+
     html body {
-  background: #27ae60;
- 
-  font-family: 'Oswald', sans-serif;
- 
-}
+        background: #27ae60;
+        font-family: 'Oswald', sans-serif;
+    }
 
-#typingText {
-  width: 800px;
-  margin: 0 auto;
-  padding: 15px;
-  text-align: center;
-  text-shadow: 2px 3px #000;
-  color: blue;
-  font-size: 50px;
-}
+    #typingText {
+        width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+        text-align: center;
+        text-shadow: 2px 3px #000;
+        color: blue;
+        font-size: 5vw; /* Responsive font size based on viewport width */
+    }
+
+    @media (min-width: 768px) {
+        #typingText {
+            font-size: 3vw; /* Adjust font size for larger screens */
+        }
+    }
+
+    .container.filter {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .container.filter h2 {
+        color: white;
+    }
+
+    .form-control {
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 10px;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .btn-primary {
+        margin-top: 10px;
+    }
 </style>
-<div id="typingText">
 
-</div>
+<div id="typingText"></div>
+
 <script>
-  var myString = "WELCOME,all bloggers...";
-var myArray = myString.split("");
-var loopTimer;
+    var myString = "WELCOME, all bloggers...";
+    var myArray = myString.split("");
+    var loopTimer;
 
-function looper() {
-  if(myArray.length > 0){
-    document.getElementById("typingText").innerHTML += myArray.shift();
-  } else {
-    clearTimeout(loopTimer);
-  }
-  loopTimer = setTimeout('looper()', 100);
-}
-looper();
-
+    function looper() {
+        if (myArray.length > 0) {
+            document.getElementById("typingText").innerHTML += myArray.shift();
+        } else {
+            clearTimeout(loopTimer);
+        }
+        loopTimer = setTimeout('looper()', 100);
+    }
+    looper();
 </script>
 
-
 <div class="container filter">
-    <h2>FILTER</h2>
-    <form action="" id='ok' method="post" >
-
-      <select  id="query" class="form-control" onchange="select()">
-      <option selected></option>
-    <a href="/">
-      <option value="tittle">By title</option>
-    </a>
-    <option value="popular">Popular</option>
-    </select>
+    <h2 style="color: #000">FILTER</h2>
+    <form action="" id='ok' method="post">
+        <select id="query" class="form-control" onchange="select()">
+            <option selected></option>
+            <a href="/">
+                <option value="tittle">BY TITLE</option>
+            </a>
+            <option value="popular">POPULAR</option>
+        </select>
     </form>
-  </div>
- 
-    <script>
-        function select(){
-          let a = document.getElementById('query');
-          console.log(a.value)
-          if (a.value == 'tittle'){
+</div>
+
+<script>
+    function select() {
+        let a = document.getElementById('query');
+        console.log(a.value)
+        if (a.value == 'tittle') {
             window.location = "/filter/tittle";
-          }else if(a.value == 'popular'){
+        } else if (a.value == 'popular') {
             window.location = "/filter/-tittle";
-          } 
         }
-      </script>
-
-
+    }
+</script>
 
 <div class="container">
     <div class="row">
         {% for i in data %}
         <div class="col-lg-4 ">
-            <!-- <h2 class="center">{{i.tittle}}</h2>     -->
             <a href="{% url 'readmore' i.id %}">
-                <img src="{{i.image.url}}" class="image center" alt="img"> <br></a>
+                <img src="{{i.image.url}}" class="image center" alt="img">
+                <br>
+            </a>
             <h2 class="center" style="color: #000;">{{i.tittle}}</h2>
             <h4 class="center" style="color: #000;">Created by: {{i.created_by}}</h4><br>
-            <a href="{% url 'readmore' i.id %}" class="center"><input type="submit" value="Read More" class="btn btn-primary"></a> <br>
+            <a href="{% url 'readmore' i.id %}" class="center">
+                <input type="submit" value="Read More" class="btn btn-primary">
+            </a>
+            <br>
         </div>
         {% endfor %}
     </div>

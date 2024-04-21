@@ -79,7 +79,7 @@ def signup(request):
 
             else:
                 User.objects.create_user(username=user,email=email,password=password).save()
-                return redirect('sign')
+                return redirect('login')
             
         else:
             messages.success(request,'password not match')
@@ -339,5 +339,37 @@ def deletecomment(request,id,post_id):
     data.delete()
     return redirect('readmore',id=post_id)
 
+#forgot  password 
+# from django.contrib.auth.forms import PasswordChangeForm
+# from django.contrib.auth import update_session_auth_hash
+# from django.shortcuts import render, redirect
+
+# def change_password(request):
+#     if request.method == 'POST':
+#         form = PasswordChangeForm(request.user, request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             update_session_auth_hash(request, user)
+#             return redirect('password_change_done')
+#     else:
+#         form = PasswordChangeForm(request.user)
+#     return render(request, 'change-password/change_password.html', {'form': form})
+
+# def password_change_done(request):
+#     return render(request, 'change-password/password_change_done.html')
+
+from django.shortcuts import render
+
+def password_reset_done(request):
+    # Assuming you have a user object with uidb64 and token attributes
+    user = get_user_somehow(request)
+
+    context = {
+        'user': user,
+        'protocol': 'https',  # Replace with your protocol
+        'domain': 'gmail.com',  # Replace with your domain
+    }
+
+    return render(request, 'registration/password_reset_done.html', context)
 
 

@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from web_app import views
+# from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth import views as auth_views
 
 admin.site.site_header = "Sewak's Blog Admin"
 admin.site.site_title = "Sewak's Blog Admin Portal"
@@ -53,5 +55,17 @@ urlpatterns = [
     path("com",views.com,name="com"),
     path('comment/<int:id>',views.comment,name='comment'),
     path('deletecomment/<int:id>/<int:post_id>',views.deletecomment,name='deletecom'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    # path('reset-password', PasswordResetView.as_view(), name='password_reset'),
+    # path('reset-password/done', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    # path('reset-password/confirm/<uidb64>[0-9A-Za-z]+)-<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'), 
+    # path('reset-password/confirm/<str:uidb64>/<str:token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+
+    # path('reset-password/complete/',PasswordResetCompleteView.as_view(),name='password_reset_complete'),
+    # path('change_password/', views.change_password, name='change_password'),
+    # path('password_change_done/', views.password_change_done, name='password_change_done'),
    
 ]
