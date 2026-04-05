@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -9,6 +10,8 @@
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
 
   <style>
 
@@ -16,12 +19,12 @@
 
 </head>
 
-<body style="background-color: #f3bccf;">
+<body class="app-body">
 
   <div class="navb">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg site-nav">
       <div class="container-fluid">
-        <a class="navbar-brand" href="login"><i class="fa fa-home" style="font-size: 36px;"></i>
+        <a class="navbar-brand" href="login"><i class="fa fa-home" style="font-size: 28px;"></i>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,10 +45,9 @@
   {% block content %}
 
   {% endblock %}
-  <footer>
+  <footer class="site-footer">
     <div class="container">
 
-      <br> <br>
       <hr>
       <center> <a href="https://www.instagram.com/sewak_7_7/?hl=en"> <img
             src="https://res.cloudinary.com/dpxu9uyjw/image/upload/v1679049145/instagram_vzrzyu.png" alt=""
@@ -58,9 +60,8 @@
             style="width: 50px;"></a>
 
         <br>
-        © Anime Blogs by Sewak
+        &copy; Anime Blogs by Sewak
       </center>
-      <br> <br>
     </div>
   </footer>
 

@@ -1,75 +1,11 @@
 {% extends 'base.html' %}
 {% block title%} Index {% endblock title %}
 {% block content%}
-<title>Index</title>
-
-<style>
-    .center {
-        display: table;
-        margin: auto;
-    }
-
-    .image {
-        margin-top: 50px;
-        width: 350px;
-        height: 470px;
-        object-fit: cover;
-        border-radius: 20px;
-        object-fit: cover;
-        transition: 0.4s;
-    }
-
-    .image:hover {
-        transform: scale(1.1);
-        box-shadow: 10px 10px 30px 5px rgb(206, 15, 47);
-    }
-
-    html body {
-        background: #27ae60;
-        font-family: 'Oswald', sans-serif;
-    }
-
-    #typingText {
-        width: 100%;
-        margin: 0 auto;
-        padding: 15px;
-        text-align: center;
-        text-shadow: 2px 3px #000;
-        color: blue;
-        font-size: 5vw; /* Responsive font size based on viewport width */
-    }
-
-    @media (min-width: 768px) {
-        #typingText {
-            font-size: 3vw; /* Adjust font size for larger screens */
-        }
-    }
-
-    .container.filter {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .container.filter h2 {
-        color: white;
-    }
-
-    .form-control {
-        width: 50%;
-        margin: 0 auto;
-        margin-top: 10px;
-    }
-
-    .container {
-        text-align: center;
-    }
-
-    .btn-primary {
-        margin-top: 10px;
-    }
-</style>
-
-<div id="typingText"></div>
+<div class="page-wrap">
+    <div class="hero">
+        <div id="typingText" class="hero-title"></div>
+        <p class="hero-subtitle">Curated thoughts, stories, and ideas from your community.</p>
+    </div>
 
 <script>
     var myString = "WELCOME, all bloggers...";
@@ -87,18 +23,16 @@
     looper();
 </script>
 
-<div class="container filter">
-    <h2 style="color: #000">FILTER</h2>
-    <form action="" id='ok' method="post">
-        <select id="query" class="form-control" onchange="select()">
-            <option selected></option>
-            <a href="/">
-                <option value="tittle">BY TITLE</option>
-            </a>
-            <option value="popular">POPULAR</option>
-        </select>
-    </form>
-</div>
+    <div class="container filter-card card-like">
+        <h2>Filter</h2>
+        <form action="" id="ok" method="post">
+            <select id="query" class="form-control" onchange="select()">
+                <option selected></option>
+                <option value="tittle">By Title</option>
+                <option value="popular">Popular</option>
+            </select>
+        </form>
+    </div>
 
 <script>
     function select() {
@@ -112,22 +46,23 @@
     }
 </script>
 
-<div class="container">
-    <div class="row">
-        {% for i in data %}
-        <div class="col-lg-4 ">
-            <a href="{% url 'readmore' i.id %}">
-                <img src="{{i.image.url}}" class="image center" alt="img">
-                <br>
-            </a>
-            <h2 class="center" style="color: #000;">{{i.tittle}}</h2>
-            <h4 class="center" style="color: #000;">Created by: {{i.created_by}}</h4><br>
-            <a href="{% url 'readmore' i.id %}" class="center">
-                <input type="submit" value="Read More" class="btn btn-primary">
-            </a>
-            <br>
+    <div class="container">
+        <div class="row blog-grid">
+            {% for i in data %}
+            <div class="col-lg-4">
+                <div class="blog-card">
+                    <a href="{% url 'readmore' i.id %}">
+                        <img src="{{i.image.url}}" alt="img">
+                    </a>
+                    <div class="blog-body">
+                        <h2 class="blog-title">{{i.tittle}}</h2>
+                        <div class="blog-meta">Created by: {{i.created_by}}</div>
+                        <a href="{% url 'readmore' i.id %}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
 

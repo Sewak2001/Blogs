@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,16 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
     <title>{% block title%}{% endblock title%} | Blog Web</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body class="p-0 m-0 border-0 bd-example"  style="background-color: #e27bec;">
+  <body class="app-body">
 
  
   <!-- <div class="container"> -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg site-nav">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/showblog"><i class="fa fa-home" style="font-size: 30px; color: beige;"></i>
+      <a class="navbar-brand" href="/showblog"><i class="fa fa-home" style="font-size: 28px;"></i>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,30 +28,30 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/formblog">
-              <h1 style="font-size: 20px;">Add Blog</h1>
+              <span class="nav-link-text">Add Blog</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/formc">
-              <h1 style="font-size: 20px;">Contact Us</h1>
+              <span class="nav-link-text">Contact Us</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link active" href="/edit">
-              <h1 style="font-size: 20px;">Edit</h1>
+              <span class="nav-link-text">Edit</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link active" href="/formf">
-              <h1 style="font-size: 20px;">Profile</h1>
+              <span class="nav-link-text">Profile</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link active" href="/about">
-              <h1 style="font-size: 20px;">About Us</h1>
+              <span class="nav-link-text">About Us</span>
             </a>
           </li>
           
@@ -61,11 +65,9 @@
         
         <div>
           <a href="formf">
-            <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         </div>
 
-        <i class="fa fa-user" style="font-size: 30px; color: white;">{{user}}</i>
+        <i class="fa fa-user" style="font-size: 26px; color: white;">{{user}}</i>
         </a> &nbsp; &nbsp; &nbsp; &nbsp;
 
         <a href="{% url 'logout' %}">
@@ -82,10 +84,9 @@
 
   {% block content %}
   {% endblock %}
-  <footer style="margin-top: 20px;">
+  <footer class="site-footer">
     <div class="container">
 
-      <br> <br>
       <hr>
       <center> <a href="https://www.instagram.com/sewak_7_7/?hl=en"> <img
             src="https://res.cloudinary.com/dpxu9uyjw/image/upload/v1679049145/instagram_vzrzyu.png" alt=""
@@ -98,9 +99,8 @@
             style="width: 50px;"></a>
 
         <br>
-        © Blogs by Sewak
+        &copy; Blogs by Sewak
       </center>
-      <br> <br>
     </div>
   </footer>
 

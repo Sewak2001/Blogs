@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from ckeditor.fields import RichTextField 
 
@@ -35,6 +36,17 @@ class leavecomment(models.Model):
     
     def __str__(self) -> str:
         return self.adds_id
+
+class bloglike(models.Model):
+    blog = models.ForeignKey(blog, on_delete=models.CASCADE, related_name="likes")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("blog", "user")
+
+    def __str__(self) -> str:
+        return f"{self.user.username} -> {self.blog.tittle}"
     
 
 

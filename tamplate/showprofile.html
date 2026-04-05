@@ -2,93 +2,43 @@
 {% block title%} Show Profile {% endblock title %}
 {% block content%}
 
-<h1 style="text-align: center;">PROFILE </h1><br>
+<div class="page-wrap">
+    <h1 class="page-title">Profile</h1>
 
-<style>
-    .ul {
-        font-size: 40px;
-    }
-
-    .pimage {
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .pimage img {
-        width: 100%;
-        height: auto;
-        border-radius: 50%;
-    }
-
-    .btn-group {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 10px;
-    }
-
-    .btn {
-        margin-top: 10px;
-    }
-
-    @media (min-width: 768px) {
-        .ul {
-            padding-left: 0;
-            text-align: center;
-        }
-
-        .pimage {
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 20px;
-        }
-
-        .btn-group {
-            flex-direction: column;
-            align-items: center;
-        }
-    }
-</style>
-
-<div class="ul">
-    <b>user:</b>{{user.username}}<br>
-    <b>email:</b>{{user.email}}<br>
-</div>
-
-<div class="pimage">
-    {% for i in image %}
-        <img src="{{i.image.url}}" alt="img" style="border-radius: 8px;"><br><br>
-
-        <div class="btn-group">
-            <a href="{% url 'updatei' i.id %}" class="btn btn-primary">Update Photo</a>
-            <a href="{% url 'deletei' i.id %}" class="btn btn-primary">Delete Photo</a>
-            <a href="{% url 'change' %}" class="btn btn-primary">Change Password</a>
-            <a href="{% url 'password_reset' %}" class="btn btn-primary">Forgot Password</a>
+    <div class="card-like profile-card">
+        <div class="profile-meta"><b>User:</b> {{user.username}}</div>
+        <div class="profile-meta"><b>Email:</b> {{user.email}}</div>
+        <div class="mt-4">
+            {% for i in image %}
+                <img src="{{i.image.url}}" alt="img">
+                <div class="profile-actions">
+                    <a href="{% url 'updatei' i.id %}" class="btn btn-primary">Update Photo</a>
+                    <a href="{% url 'deletei' i.id %}" class="btn btn-primary">Delete Photo</a>
+                    <a href="{% url 'change' %}" class="btn btn-primary">Change Password</a>
+                    <a href="{% url 'password_reset' %}" class="btn btn-primary">Forgot Password</a>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-</div><br><br>
-<hr>
-<h1 style="text-align: center;"><u>Your Blog</u></h1>
-<div class="container">
-    <div class="row">
-        {% for i in data1 %}
-            <div class="col-lg-4 mb-4">
-                <a href="{% url 'readmore' i.id %}">
-                    <img src="{{i.image.url}}" class="image center" alt="img" style="height: 290px; width: 100%; border-radius: 5px;">
-                    <br>
-                    <h2 class="center" style="color: black;">{{i.tittle}}</h2>
-                    <h4 class="center" style="color: black;">Created by: {{i.created_by}}</h4>
-                </a>
-                <a href="{% url 'readmore' i.id %}" class="center">
-                    <input type="submit" value="Read More" class="btn btn-primary">
-                </a>
-                <br>
-                <br>
-                <br>
-                <br>
-            </div>
-        {% endfor %}
+    </div>
+
+    <h1 class="page-title">Your Blog</h1>
+    <div class="container">
+        <div class="row blog-grid">
+            {% for i in data1 %}
+                <div class="col-lg-4 mb-4">
+                    <div class="blog-card">
+                        <a href="{% url 'readmore' i.id %}">
+                            <img src="{{i.image.url}}" alt="img">
+                        </a>
+                        <div class="blog-body">
+                            <h2 class="blog-title">{{i.tittle}}</h2>
+                            <div class="blog-meta">Created by: {{i.created_by}}</div>
+                            <a href="{% url 'readmore' i.id %}" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

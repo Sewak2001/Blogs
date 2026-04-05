@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,HttpResponse
-from .models import blog,contactus,profile
+from .models import blog,contactus,profile,bloglike
 from .forms import blogfrom,contactfrom,profilefrom,leavecomment
 from django.contrib.auth.models import User,auth 
 from django.contrib import messages
@@ -120,7 +120,9 @@ def show(request):
 def readmore(request,id):
     data1 = blog.objects.get(id=id)
     data2 = leavecomment.objects.filter(user_id=id)
-    return render(request,'readmore.html',{'data':data1,'data2':data2})
+    like_count = bloglike.objects.filter(blog=data1).count()
+    liked = bloglike.objects.filter(blog=data1, user=request.user).exists()
+    return render(request,'readmore.html',{'data':data1,'data2':data2,'like_count':like_count,'liked':liked})
 
 #show contact function
 @login_required(login_url='login')
@@ -338,6 +340,16 @@ def deletecomment(request,id,post_id):
     data = leavecomment.objects.get(id=id)
     data.delete()
     return redirect('readmore',id=post_id)
+
+#Like toggle function
+@login_required(login_url='login')
+def toggle_like(request,id):
+    if request.method == "POST":
+        post = blog.objects.get(id=id)
+        like, created = bloglike.objects.get_or_create(blog=post, user=request.user)
+        if not created:
+            like.delete()
+    return redirect('readmore', id=id)
 
 #forgot  password 
 # from django.contrib.auth.forms import PasswordChangeForm

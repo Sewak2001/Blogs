@@ -5,8 +5,3 @@ admin.site.register(blog)
 admin.site.register(contactus)
 admin.site.register(profile)
 admin.site.register(leavecomment)
-
-
-
-
-# Register your models here.
