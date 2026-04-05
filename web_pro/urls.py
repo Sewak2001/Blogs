@@ -53,6 +53,7 @@ urlpatterns = [
     path('about',views.abouts,name='about'),
     path('change',views.change_password,name='change'),
     path("com",views.com,name="com"),
+    path('like/<int:id>',views.toggle_like,name='toggle_like'),
     path('comment/<int:id>',views.comment,name='comment'),
     path('deletecomment/<int:id>/<int:post_id>',views.deletecomment,name='deletecom'),
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),

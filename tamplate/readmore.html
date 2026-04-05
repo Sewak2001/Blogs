@@ -2,83 +2,72 @@
 {% block title%} Readmore {% endblock title %}
 
 {% block content%}
-<title>Index</title>
-
-<style>
-    .center {
-        display: table;
-        margin: auto;
-    }
-
-    .image-container {
-        position: relative;
-        width: 100%;
-        max-width: 450px;
-        margin: auto;
-    }
-
-    .image {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: 8px;
-    }
-
-    .discript {
-        padding: 20px;
-        text-align: justify;
-    }
-
-    .Discription {
-        padding: 20px;
-    }
-
-    /* Added media query for small screens */
-    @media (max-width: 767px) {
-        .Discription,
-        .discript {
-            padding: 10px;
-        }
-    }
-</style>
-
-<div class="container center">
-    <div class="row">
-        <div class="col-lg-12">
-            <b><h1 class="center">{{data.tittle}}</h1></b><br>
-            <div class="image-container">
-                <img src="{{data.image.url}}" class="image center" alt="img">
+<div class="page-wrap">
+    <div class="container">
+        <div class="card-like">
+            <div class="row g-4 align-items-start">
+                <div class="col-lg-5 text-center">
+                    <img src="{{data.image.url}}" class="img-fluid rounded-4 shadow" alt="img">
+                </div>
+                <div class="col-lg-7">
+                    <h1 class="blog-title">{{data.tittle}}</h1>
+                    <div class="blog-meta mb-3">Created by: {{data.created_by}}</div>
+                    <p class="mb-4">{{data.description}}</p>
+                    <div class="like-row">
+                        <form action="{% url 'toggle_like' data.id %}" method="post">
+                            {% csrf_token %}
+                            {% if liked %}
+                                <button type="submit" class="btn btn-outline-secondary">
+                                    <i class="fa fa-thumbs-up"></i> Liked
+                                </button>
+                            {% else %}
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-thumbs-up"></i> Like
+                                </button>
+                            {% endif %}
+                        </form>
+                        <div class="like-count">{{like_count}} like{{like_count|pluralize}}</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <h2 class="Discription">Discription:-</h2>
-    <div class="container-fluid">
-        <div class="discript">
-            <p>{{data.description}}</p>
+        <div class="card-like mt-4">
+            <h2 class="mb-3">Leave a comment</h2>
+            <form action="{% url 'com' %}" method="post" class="row g-3 align-items-end">
+                {% csrf_token %}
+                <input type="text" name="u_id" value="{{user}}" hidden>
+                <input type="text" name="post_id" value="{{data.id}}" hidden>
+                <div class="col-lg-9">
+                    <label class="form-label">Comment</label>
+                    <input type="text" name="comment" class="form-control" placeholder="Share your thoughts">
+                </div>
+                <div class="col-lg-3 d-grid">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
-    </div>
-    <h2 style="text-align: end;">Created_by: {{data.created_by}}</h2>
 
-    <div class="comm text-end mt-5">
-        <form action="{% url 'com' %}" method="post">
-            {% csrf_token %}
-            <input type="text" name="u_id" value="{{user}}" hidden>
-            <input type="text" name="post_id" value="{{data.id}}" hidden>
-            Comment Here : <input type="text" name="comment">
-            <input type="submit" value="Submit">
-        </form>
-        {% if data2 %}
-            {% for i in data2 %}
-                {% if i.adds_id == user.username %}
-                    <a href="{% url 'deletecom' i.id data.id %}" style="color: red;">Del</a>
-                {% endif %}
-                <b>{{i.comment}}</b> by<h5 style="color: darkblue;">{{i.adds_id}}</h5>
-                <br>
-            {% endfor %}
-        {% else %}
-            <p>NO comment Till Now</p>
-        {% endif %}
+        <div class="card-like mt-4">
+            <h2 class="mb-3">Comments</h2>
+            {% if data2 %}
+                <div class="d-flex flex-column gap-3">
+                    {% for i in data2 %}
+                        <div class="p-3 border rounded-4 bg-white">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <strong>{{i.adds_id}}</strong>
+                                {% if i.adds_id == user.username %}
+                                    <a href="{% url 'deletecom' i.id data.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                {% endif %}
+                            </div>
+                            <div class="text-muted">{{i.comment}}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-muted mb-0">No comments yet. Be the first to add one.</p>
+            {% endif %}
+        </div>
     </div>
 </div>
 

@@ -2,45 +2,24 @@
 {% block title%} Login form {% endblock title %}
 
 {% block content%}
-
-
-<style>
-    .center {
-        display: table;
-        margin: auto;
-    }
-
-    .image {
-        margin-top: 50px;
-        width: 350px;
-        height: 470px;
-        object-fit: cover;
-        border-radius: 20px;
-        object-fit: cover;
-        transition: 0.4s;
-    }
-
-    .image:hover {
-        transform: scale(1.1);
-        box-shadow: 10px 10px 30px 5px rgb(206, 15, 47);
-    }
-</style>
-
-<div class="container">
-    <div class="row">
-        {% for i in data %}
-        <div class="col-lg-4 ">
-            
-            <a href="/login">
-                <img src="{{i.image.url}}" class="image center" alt="img"> <br>
-                <h2 class="center" style="color: #000;">{{i.tittle}}</h2>
-                <h4 class="center" style="color: #000;">Created by: {{i.created_by}}</h4>
-            </a>
-            <a href="/login" class="center">
-                <input type="submit" value="Read More" class="btn btn-primary">
-            </a> <br> <br>
+<div class="page-wrap">
+    <div class="container">
+        <div class="row blog-grid">
+            {% for i in data %}
+            <div class="col-lg-4">
+                <div class="blog-card">
+                    <a href="/login">
+                        <img src="{{i.image.url}}" alt="img">
+                    </a>
+                    <div class="blog-body">
+                        <h2 class="blog-title">{{i.tittle}}</h2>
+                        <div class="blog-meta">Created by: {{i.created_by}}</div>
+                        <a href="/login" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
 
